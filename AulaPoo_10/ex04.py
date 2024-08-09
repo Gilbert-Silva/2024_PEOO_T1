@@ -16,9 +16,6 @@ print(x.strftime("%A, %d/%B/%Y"))
 print(x.strftime("%a, %d/%b/%y"))
 
 
-
-
-
 x = datetime.now()
 t = 0
 for i in range(1000000):
