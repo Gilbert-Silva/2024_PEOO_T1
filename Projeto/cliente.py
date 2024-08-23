@@ -6,6 +6,7 @@
 
 import json
 
+# Modelo
 class Cliente:
   def __init__(self, id, nome, email, fone):
     self.id = id
@@ -15,6 +16,7 @@ class Cliente:
   def __str__(self):
     return f"{self.id} - {self.nome} - {self.email} - {self.fone}"
 
+# Persistência
 class Clientes:
   objetos = []    # atributo estático
   @classmethod
@@ -60,11 +62,14 @@ class Clientes:
   @classmethod
   def abrir(cls):
     cls.objetos = []
-    with open("clientes.json", mode="r") as arquivo:   # r - read
-      texto = json.load(arquivo)
-      for obj in texto:   
-        c = Cliente(obj["id"], obj["nome"], obj["email"], obj["fone"])
-        cls.objetos.append(c)
+    try:
+      with open("clientes.json", mode="r") as arquivo:   # r - read
+        texto = json.load(arquivo)
+        for obj in texto:   
+          c = Cliente(obj["id"], obj["nome"], obj["email"], obj["fone"])
+          cls.objetos.append(c)
+    except FileNotFoundError:
+      pass
 
 class UI:
   @staticmethod
