@@ -32,3 +32,18 @@ while n != 0:
     print(numeros)
     n = int(input())
 
+print("usando xor 2")
+n = int(input())
+while n != 0:
+    numeros = 0
+    a = input() + " "
+    s = ""
+    for c in a:
+        if c == " ":
+            x = int(s)
+            numeros = numeros ^ x
+            s = ""
+        else:
+            s += c
+    print(numeros)
+    n = int(input())
