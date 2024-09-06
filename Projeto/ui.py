@@ -1,5 +1,6 @@
-from cliente import Cliente, Clientes
-from horario import Horario, Horarios
+#from cliente import Cliente, Clientes
+#from horario import Horario, Horarios
+import views
 from datetime import datetime
 
 class UI:
@@ -33,24 +34,26 @@ class UI:
     nome = input("Informe o nome: ")
     email = input("Informe o e-mail: ")
     fone = input("Informe o fone: ")
-    c = Cliente(0, nome, email, fone)
-    Clientes.inserir(c)
+    #c = Cliente(0, nome, email, fone)
+    #Clientes.inserir(c)    
+    views.cliente_inserir(nome, email, fone)
 
   @staticmethod
   def horario_inserir():
     datastr = input("Informe uma data e horário no formato dd/mm/aaaa hh:mm: ")
     data = datetime.strptime(datastr, "%d/%m/%Y %H:%M")
-    c = Horario(0, data)
-    Horarios.inserir(c)
+    #c = Horario(0, data)
+    #Horarios.inserir(c)
+    views.horario_inserir(data)
 
   @staticmethod
   def cliente_listar():  
-    for c in Clientes.listar():
+    for c in views.cliente_listar():
       print(c)
 
   @staticmethod
   def horario_listar():  
-    for c in Horarios.listar():
+    for c in views.horario_listar():
       print(c)
 
   @staticmethod
@@ -60,8 +63,7 @@ class UI:
     nome = input("Informe o novo nome: ")
     email = input("Informe o novo e-mail: ")
     fone = input("Informe o novo fone: ")
-    c = Cliente(id, nome, email, fone)
-    Clientes.atualizar(c)
+    views.cliente_atualizar(id, nome, email, fone)
 
   @staticmethod
   def horario_atualizar():
@@ -71,8 +73,7 @@ class UI:
   def cliente_excluir():
     UI.cliente_listar()
     id = int(input("Informe o id do cliente a ser excluído: "))
-    c = Cliente(id, "", "", "")
-    Clientes.excluir(c)
+    views.cliente_inserir(id)
 
   @staticmethod
   def horario_excluir():
