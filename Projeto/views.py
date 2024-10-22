@@ -1,24 +1,25 @@
-from cliente import Cliente, Clientes
-from horario import Horario, Horarios
+from models.cliente import Cliente, Clientes
+from models.horario import Horario, Horarios
 
-def cliente_inserir(nome, email, fone):
-    c = Cliente(0, nome, email, fone)
-    Clientes.inserir(c)
+class View:
+    def cliente_inserir(nome, email, fone):
+        c = Cliente(0, nome, email, fone)
+        Clientes.inserir(c)
 
-def horario_inserir(data):
-    c = Horario(0, data)
-    Horarios.inserir(c)
+    def horario_inserir(data):
+        c = Horario(0, data)
+        Horarios.inserir(c)
 
-def cliente_listar():
-    return Clientes.listar()    
+    def cliente_listar():
+        return Clientes.listar()    
 
-def horario_listar():
-    return Horarios.listar()    
+    def horario_listar():
+        return Horarios.listar()    
 
-def cliente_atualizar(id, nome, email, fone):
-    c = Cliente(id, nome, email, fone)
-    Clientes.atualizar(c)
+    def cliente_atualizar(id, nome, email, fone):
+        c = Cliente(id, nome, email, fone)
+        Clientes.atualizar(c)
 
-def cliente_excluir(id):
-    c = Cliente(id, "", "", "")
-    Clientes.excluir(c)    
+    def cliente_excluir(id):
+        c = Cliente(id, "", "", "")
+        Clientes.excluir(c)    

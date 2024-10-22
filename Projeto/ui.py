@@ -1,6 +1,6 @@
 #from cliente import Cliente, Clientes
 #from horario import Horario, Horarios
-import views
+from views import View
 from datetime import datetime
 
 class UI:
@@ -36,7 +36,7 @@ class UI:
     fone = input("Informe o fone: ")
     #c = Cliente(0, nome, email, fone)
     #Clientes.inserir(c)    
-    views.cliente_inserir(nome, email, fone)
+    View.cliente_inserir(nome, email, fone)
 
   @staticmethod
   def horario_inserir():
@@ -44,16 +44,16 @@ class UI:
     data = datetime.strptime(datastr, "%d/%m/%Y %H:%M")
     #c = Horario(0, data)
     #Horarios.inserir(c)
-    views.horario_inserir(data)
+    View.horario_inserir(data)
 
   @staticmethod
   def cliente_listar():  
-    for c in views.cliente_listar():
+    for c in View.cliente_listar():
       print(c)
 
   @staticmethod
   def horario_listar():  
-    for c in views.horario_listar():
+    for c in View.horario_listar():
       print(c)
 
   @staticmethod
@@ -63,7 +63,7 @@ class UI:
     nome = input("Informe o novo nome: ")
     email = input("Informe o novo e-mail: ")
     fone = input("Informe o novo fone: ")
-    views.cliente_atualizar(id, nome, email, fone)
+    View.cliente_atualizar(id, nome, email, fone)
 
   @staticmethod
   def horario_atualizar():
@@ -73,7 +73,7 @@ class UI:
   def cliente_excluir():
     UI.cliente_listar()
     id = int(input("Informe o id do cliente a ser excluído: "))
-    views.cliente_inserir(id)
+    View.cliente_inserir(id)
 
   @staticmethod
   def horario_excluir():
