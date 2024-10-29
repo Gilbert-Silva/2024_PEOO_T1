@@ -3,6 +3,10 @@ from retanguloUI import RetanguloUI
 
 #RetanguloUI.main()
 
+op = st.sidebar.selectbox("Menu", ["Cadastro de Clientes", "Cadastro de Horários", "Cadastro de Serviços", "Abrir Agenda do Dia"])
+if op == "Cadastro de Clientes": RetanguloUI.main()
+
+
 import pandas as pd
 
 px = [0, 1, 2, 3]
