@@ -21,6 +21,7 @@ class Horario:
 
 class Horarios:
   objetos = []    # atributo estático
+
   @classmethod
   def inserir(cls, obj):
     cls.abrir()
@@ -30,6 +31,7 @@ class Horarios:
     obj.id = m + 1
     cls.objetos.append(obj)
     cls.salvar()
+
   @classmethod
   def listar_id(cls, id):
     cls.abrir()
@@ -63,6 +65,7 @@ class Horarios:
   def salvar(cls):
     with open("horarios.json", mode="w") as arquivo:   # w - write
       json.dump(cls.objetos, arquivo, default = Horario.to_json)
+
   @classmethod
   def abrir(cls):
     cls.objetos = []

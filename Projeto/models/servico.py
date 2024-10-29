@@ -1,23 +1,17 @@
-# Lista de Clientes
-# C - Create - Insere um objeto na lista
-# R - Read   - Listar os objetos da lista
-# U - Update - Atualizar um objeto na lista
-# D - Delete - Exclui um objeto da lista
-
 import json
 
 # Modelo
-class Cliente:
-  def __init__(self, id, nome, email, fone):
+class Servico:
+  def __init__(self, id, descricao, valor, duracao):
     self.id = id
-    self.nome = nome
-    self.email = email
-    self.fone = fone
+    self.descricao = descricao
+    self.valor = valor
+    self.duracao = duracao
   def __str__(self):
-    return f"{self.id} - {self.nome} - {self.email} - {self.fone}"
+    return f"{self.id} - {self.descricao} - R$ {self.valor:.2f} - {self.duracao} min"
 
 # Persistência
-class Clientes:
+class Servicos:
   objetos = []    # atributo estático
 
   @classmethod
@@ -41,9 +35,9 @@ class Clientes:
   def atualizar(cls, obj):
     c = cls.listar_id(obj.id)
     if c != None:
-      c.nome = obj.nome
-      c.email = obj.email
-      c.fone = obj.fone
+      c.descricao = obj.descricao
+      c.valor = obj.valor
+      c.duracao = obj.duracao
       cls.salvar()
 
   @classmethod
@@ -60,17 +54,17 @@ class Clientes:
 
   @classmethod
   def salvar(cls):
-    with open("clientes.json", mode="w") as arquivo:   # w - write
+    with open("servicos.json", mode="w") as arquivo:   # w - write
       json.dump(cls.objetos, arquivo, default = vars)
 
   @classmethod
   def abrir(cls):
     cls.objetos = []
     try:
-      with open("clientes.json", mode="r") as arquivo:   # r - read
+      with open("servicos.json", mode="r") as arquivo:   # r - read
         texto = json.load(arquivo)
         for obj in texto:   
-          c = Cliente(obj["id"], obj["nome"], obj["email"], obj["fone"])
+          c = Servico(obj["id"], obj["descricao"], obj["valor"], obj["duracao"])
           cls.objetos.append(c)
     except FileNotFoundError:
       pass
