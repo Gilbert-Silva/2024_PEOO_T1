@@ -4,12 +4,15 @@ from models.servico import Servico, Servicos
 from datetime import datetime, timedelta
 
 class View:
-    def cliente_inserir(nome, email, fone):
-        c = Cliente(0, nome, email, fone)
+    def cliente_inserir(nome, email, fone, senha):
+        c = Cliente(0, nome, email, fone, senha)
         Clientes.inserir(c)
 
     def cliente_listar():
         return Clientes.listar()    
+
+    def cliente_listar_id(id):
+        return Clientes.listar_id(id)    
 
     def cliente_atualizar(id, nome, email, fone):
         c = Cliente(id, nome, email, fone)
@@ -30,7 +33,7 @@ class View:
         return Horarios.listar()    
 
     def horario_atualizar(id, data, confirmado, id_cliente, id_servico):
-        c = Horario(0, data)
+        c = Horario(id, data)
         c.confirmado = confirmado
         c.id_cliente = id_cliente
         c.id_servico = id_servico
@@ -74,6 +77,9 @@ class View:
 
     def servico_listar():
         return Servicos.listar()    
+
+    def servico_listar_id(id):
+        return Servicos.listar_id(id)    
 
     def servico_atualizar(id, descricao, valor, duracao):
         c = Servico(id, descricao, valor, duracao)
