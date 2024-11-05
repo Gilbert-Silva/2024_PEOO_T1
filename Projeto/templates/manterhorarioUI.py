@@ -18,15 +18,16 @@ class ManterHorarioUI:
         if len(Horarios) == 0: 
             st.write("Nenhum horário cadastrado")
         else:  
-            #for obj in Horarios: st.write(obj)
             dic = []
             #for obj in Horarios: dic.append(obj.__dict__)
+
             for obj in Horarios:
                 cliente = View.cliente_listar_id(obj.id_cliente)
                 servico = View.servico_listar_id(obj.id_servico)
                 if cliente != None: cliente = cliente.nome
                 if servico != None: servico = servico.descricao
-                dic.append({"id" : obj.id, "data" : obj.data, "confirmado" : obj.confirmado, "cliente" : cliente , "serviço" : servico})
+                dic.append({"id" : obj.id, "data" : obj.data, "confirmado" : obj.confirmado, "cliente" : cliente, "serviço" : servico})
+            
             df = pd.DataFrame(dic)
             st.dataframe(df)
 
@@ -53,8 +54,10 @@ class ManterHorarioUI:
             op = st.selectbox("Atualização de horário", horarios)
             data = st.text_input("Informe a nova data e horário do serviço", op.data.strftime("%d/%m/%Y %H:%M"))
             confirmado = st.checkbox("Nova confirmação", op.confirmado)
-            cliente = st.selectbox("Informe o novo cliente", clientes, op.id_cliente)
-            servico = st.selectbox("Informe o novo serviço", servicos, op.id_servico)
+            id_cliente = None if op.id_cliente in [0, None] else op.id_cliente
+            id_servico = None if op.id_servico in [0, None] else op.id_servico
+            cliente = st.selectbox("Informe o novo cliente", clientes, next((i for i, c in enumerate(clientes) if c.id == id_cliente), None))
+            servico = st.selectbox("Informe o novo serviço", servicos, next((i for i, s in enumerate(servicos) if s.id == id_servico), None))
             if st.button("Atualizar"):
                 View.horario_atualizar(op.id, datetime.strptime(data, "%d/%m/%Y %H:%M"),  confirmado, cliente.id, servico.id)
                 st.success("Horário atualizado com sucesso")

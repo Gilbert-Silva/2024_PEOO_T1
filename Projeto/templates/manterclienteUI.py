@@ -27,8 +27,9 @@ class ManterClienteUI:
         nome = st.text_input("Informe o nome do cliente")
         email = st.text_input("Informe o e-mail")
         fone = st.text_input("Informe o fone")
+        senha = st.text_input("Informe a senha", type="password")
         if st.button("Inserir"):
-            View.cliente_inserir(nome, email, fone)
+            View.cliente_inserir(nome, email, fone, senha)
             st.success("Cliente inserido com sucesso")
             time.sleep(2)
             st.rerun()
@@ -39,11 +40,12 @@ class ManterClienteUI:
             st.write("Nenhum cliente cadastrado")
         else:
             op = st.selectbox("Atualização de cliente", clientes)
-            nome = st.text_input("Informe o nome do cliente", op.nome)
-            email = st.text_input("Informe o e-mail", op.email)
-            fone = st.text_input("Informe o fone", op.fone)
+            nome = st.text_input("Informe o novo nome do cliente", op.nome)
+            email = st.text_input("Informe o novo e-mail", op.email)
+            fone = st.text_input("Informe o novo fone", op.fone)
+            senha = st.text_input("Informe a nova senha", op.senha, type="password")
             if st.button("Atualizar"):
-                View.cliente_atualizar(op.id, nome, email, fone)
+                View.cliente_atualizar(op.id, nome, email, fone, senha)
                 st.success("Cliente atualizado com sucesso")
                 time.sleep(2)
                 st.rerun()
