@@ -4,6 +4,11 @@ from models.servico import Servico, Servicos
 from datetime import datetime, timedelta
 
 class View:
+    def cliente_admin():
+        for c in View.cliente_listar():
+            if c.email == "admin": return
+        View.cliente_inserir("admin", "admin", "1234", "1234")
+
     def cliente_inserir(nome, email, fone, senha):
         c = Cliente(0, nome, email, fone, senha)
         Clientes.inserir(c)
@@ -19,7 +24,7 @@ class View:
         Clientes.atualizar(c)
 
     def cliente_excluir(id):
-        c = Cliente(id, "", "", "")
+        c = Cliente(id, "", "", "", "")
         Clientes.excluir(c)    
 
     def cliente_autenticar(email, senha):
