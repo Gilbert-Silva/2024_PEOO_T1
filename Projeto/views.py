@@ -43,6 +43,13 @@ class View:
     def horario_listar():
         return Horarios.listar()    
 
+    def horario_listar_disponiveis():
+        horarios = View.horario_listar()
+        disponiveis = []
+        for h in horarios:
+            if h.data >= datetime.now() and h.id_cliente == None: disponiveis.append(h)
+        return disponiveis   
+
     def horario_atualizar(id, data, confirmado, id_cliente, id_servico):
         c = Horario(id, data)
         c.confirmado = confirmado

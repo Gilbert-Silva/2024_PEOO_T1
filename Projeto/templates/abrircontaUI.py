@@ -5,11 +5,11 @@ import time
 
 class AbrirContaUI:
     def main():
-        st.header("Abrir conta no sistema")
+        st.header("Abrir Conta no Sistema")
         AbrirContaUI.inserir()
 
     def inserir():
-        nome = st.text_input("Informe o nome do cliente")
+        nome = st.text_input("Informe o nome")
         email = st.text_input("Informe o e-mail")
         fone = st.text_input("Informe o fone")
         senha = st.text_input("Informe a senha", type="password")

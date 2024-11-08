@@ -14,14 +14,14 @@ class ManterHorarioUI:
         with tab4: ManterHorarioUI.excluir()
 
     def listar():
-        Horarios = View.horario_listar()
-        if len(Horarios) == 0: 
+        horarios = View.horario_listar()
+        if len(horarios) == 0: 
             st.write("Nenhum horário cadastrado")
         else:  
             dic = []
             #for obj in Horarios: dic.append(obj.__dict__)
 
-            for obj in Horarios:
+            for obj in horarios:
                 cliente = View.cliente_listar_id(obj.id_cliente)
                 servico = View.servico_listar_id(obj.id_servico)
                 if cliente != None: cliente = cliente.nome
@@ -36,10 +36,14 @@ class ManterHorarioUI:
         servicos = View.servico_listar()
         data = st.text_input("Informe a data e horário do serviço", datetime.now().strftime("%d/%m/%Y %H:%M"))
         confirmado = st.checkbox("Confirmado")
-        cliente = st.selectbox("Informe o cliente", clientes)
-        servico = st.selectbox("Informe o serviço", servicos)
+        cliente = st.selectbox("Informe o cliente", clientes, index = None)
+        servico = st.selectbox("Informe o serviço", servicos, index = None)
         if st.button("Inserir"):
-            View.horario_inserir(datetime.strptime(data, "%d/%m/%Y %H:%M"), confirmado, cliente.id, servico.id)
+            id_cliente = None
+            id_servico = None
+            if cliente != None: id_cliente = cliente.id
+            if servico != None: id_servico = servico.id
+            View.horario_inserir(datetime.strptime(data, "%d/%m/%Y %H:%M"), confirmado, id_cliente, id_servico)
             st.success("Horário inserido com sucesso")
             time.sleep(2)
             st.rerun()
@@ -59,7 +63,11 @@ class ManterHorarioUI:
             cliente = st.selectbox("Informe o novo cliente", clientes, next((i for i, c in enumerate(clientes) if c.id == id_cliente), None))
             servico = st.selectbox("Informe o novo serviço", servicos, next((i for i, s in enumerate(servicos) if s.id == id_servico), None))
             if st.button("Atualizar"):
-                View.horario_atualizar(op.id, datetime.strptime(data, "%d/%m/%Y %H:%M"),  confirmado, cliente.id, servico.id)
+                id_cliente = None
+                id_servico = None
+                if cliente != None: id_cliente = cliente.id
+                if servico != None: id_servico = servico.id
+                View.horario_atualizar(op.id, datetime.strptime(data, "%d/%m/%Y %H:%M"),  confirmado, id_cliente, id_servico)
                 st.success("Horário atualizado com sucesso")
                 time.sleep(2)
                 st.rerun()

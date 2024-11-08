@@ -1,1 +1,1 @@
-[{"id": 1, "descricao": "Consulta", "valor": 200.0, "duracao": 30}, {"id": 2, "descricao": "Consulta urg\u00eancia", "valor": 250.0, "duracao": 30}]
+[{"id": 1, "descricao": "Lavagem Simples", "valor": 60.0, "duracao": 30}, {"id": 2, "descricao": "Lavagem Completa", "valor": 100.0, "duracao": 30}, {"id": 3, "descricao": "Polimento", "valor": 500.0, "duracao": 120}]

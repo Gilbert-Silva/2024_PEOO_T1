@@ -13,13 +13,13 @@ class ManterServicoUI:
         with tab4: ManterServicoUI.excluir()
 
     def listar():
-        Servicos = View.servico_listar()
-        if len(Servicos) == 0: 
+        servicos = View.servico_listar()
+        if len(servicos) == 0: 
             st.write("Nenhum serviço cadastrado")
         else:    
             #for obj in Servicos: st.write(obj)
             dic = []
-            for obj in Servicos: dic.append(obj.__dict__)
+            for obj in servicos: dic.append(obj.__dict__)
             df = pd.DataFrame(dic)
             st.dataframe(df)
 
@@ -39,9 +39,9 @@ class ManterServicoUI:
             st.write("Nenhum serviço cadastrado")
         else:
             op = st.selectbox("Atualização de serviço", servicos)
-            descricao = st.text_input("Informe o novo nome do serviço")
-            valor = st.text_input("Informe o novo valor (R$)")
-            duracao = st.text_input("Informe a nova duração (minutos)")
+            descricao = st.text_input("Informe o novo nome do serviço", op.descricao)
+            valor = st.text_input("Informe o novo valor (R$)", op.valor)
+            duracao = st.text_input("Informe a nova duração (minutos)", str(op.duracao))
             if st.button("Atualizar"):
                 View.servico_atualizar(op.id, descricao, float(valor), int(duracao))
                 st.success("Serviço atualizado com sucesso")
