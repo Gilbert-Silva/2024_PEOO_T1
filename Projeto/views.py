@@ -1,6 +1,7 @@
 from models.cliente import Cliente, Clientes
 from models.horario import Horario, Horarios
 from models.servico import Servico, Servicos
+from models.profissional import Profissional, Profissionais
 from datetime import datetime, timedelta
 
 class View:
@@ -27,17 +28,39 @@ class View:
         c = Cliente(id, "", "", "", "")
         Clientes.excluir(c)    
 
+
+    def profissional_inserir(nome, especialidade, conselho):
+        c = Profissional(0, nome, especialidade, conselho)
+        Profissionais.inserir(c)
+
+    def profissional_listar():
+        return Profissionais.listar()    
+
+    def profissional_listar_id(id):
+        return Profissionais.listar_id(id)    
+
+    def profissional_atualizar(id, nome, especialidade, conselho):
+        c = Profissional(id, nome, especialidade, conselho)
+        Profissionais.atualizar(c)
+
+    def profissional_excluir(id):
+        c = Profissional(id, "", "", "")
+        Profissionais.excluir(c) 
+
+
+
     def cliente_autenticar(email, senha):
         for c in View.cliente_listar():
             if c.email == email and c.senha == senha:
                 return {"id" : c.id, "nome" : c.nome }
         return None
 
-    def horario_inserir(data, confirmado, id_cliente, id_servico):
+    def horario_inserir(data, confirmado, id_cliente, id_servico, id_profissional):
         c = Horario(0, data)
         c.confirmado = confirmado
         c.id_cliente = id_cliente
         c.id_servico = id_servico
+        c.id_profissional = id_profissional
         Horarios.inserir(c)
 
     def horario_listar():
@@ -50,11 +73,12 @@ class View:
             if h.data >= datetime.now() and h.id_cliente == None: disponiveis.append(h)
         return disponiveis   
 
-    def horario_atualizar(id, data, confirmado, id_cliente, id_servico):
+    def horario_atualizar(id, data, confirmado, id_cliente, id_servico, id_profissional):
         c = Horario(id, data)
         c.confirmado = confirmado
         c.id_cliente = id_cliente
         c.id_servico = id_servico
+        c.id_profissional = id_profissional
         Horarios.atualizar(c)
 
     def horario_excluir(id):
@@ -74,7 +98,7 @@ class View:
         x = di
         while x <= df:
             #cadastrar o horário x
-            View.horario_inserir(x, False, None, None)
+            View.horario_inserir(x, False, None, None, None)
             #passar para o próximo horário
             x = x + d
 
