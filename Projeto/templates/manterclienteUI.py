@@ -5,6 +5,8 @@ import time
 
 class ManterClienteUI:
     def main():
+        if "placeholder" not in st.session_state: 
+            st.session_state["placeholder"] = ""
         st.header("Cadastro de Clientes")
         tab1, tab2, tab3, tab4 = st.tabs(["Listar", "Inserir", "Atualizar", "Excluir"])
         with tab1: ManterClienteUI.listar()
@@ -24,15 +26,22 @@ class ManterClienteUI:
             st.dataframe(df)
 
     def inserir():
-        nome = st.text_input("Informe o nome do cliente")
+        nome = st.text_input("Informe o nome do cliente", placeholder = st.session_state["placeholder"])
         email = st.text_input("Informe o e-mail")
         fone = st.text_input("Informe o fone")
         senha = st.text_input("Informe a senha", type="password")
+
         if st.button("Inserir"):
-            View.cliente_inserir(nome, email, fone, senha)
-            st.success("Cliente inserido com sucesso")
-            time.sleep(2)
-            st.rerun()
+            if nome == "":
+                st.session_state["placeholder"] = "O campo não pode estar vazio!"
+                st.error("Informe o nome")
+                time.sleep(2)
+                st.rerun()
+            else:
+                View.cliente_inserir(nome, email, fone, senha)
+                st.success("Cliente inserido com sucesso")
+                time.sleep(2)
+                st.rerun()
 
     def atualizar():
         clientes = View.cliente_listar()
