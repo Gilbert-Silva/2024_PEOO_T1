@@ -42,10 +42,12 @@ class Clientes:
   def atualizar(cls, obj):
     c = cls.listar_id(obj.id)
     if c != None:
-      c.nome = obj.nome
-      c.email = obj.email
-      c.fone = obj.fone
-      c.senha = obj.senha
+      cls.objetos.remove(c)
+      cls.objetos.append(obj)      
+      #c.nome = obj.nome
+      #c.email = obj.email
+      #c.fone = obj.fone
+      #c.senha = obj.senha
       cls.salvar()
 
   @classmethod
