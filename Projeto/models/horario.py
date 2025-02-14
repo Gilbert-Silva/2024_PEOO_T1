@@ -45,11 +45,13 @@ class Horarios:
   def atualizar(cls, obj):
     c = cls.listar_id(obj.id)
     if c != None:
-      c.data = obj.data
-      c.confirmado = obj.confirmado
-      c.id_cliente = obj.id_cliente
-      c.id_servico = obj.id_servico
-      c.id_profissional = obj.id_profissional
+      cls.objetos.remove(c)
+      cls.objetos.append(obj) 
+      #c.data = obj.data
+      #c.confirmado = obj.confirmado
+      #c.id_cliente = obj.id_cliente
+      #c.id_servico = obj.id_servico
+      #c.id_profissional = obj.id_profissional
       cls.salvar()
 
   @classmethod
